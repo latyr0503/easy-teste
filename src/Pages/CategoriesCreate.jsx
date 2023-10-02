@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import axiosClient from "../axios";
 const CategoriesCreate = () => {
   const [nom, setNom] = useState("");
   const [slug, setSlug] = useState("");
@@ -17,8 +18,8 @@ const CategoriesCreate = () => {
   const create = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(`http://localhost:8000/api/categorie`, {
+    await axiosClient
+      .post(`/categorie`, {
         nom: nom,
         url: url,      
         slug: nom,
@@ -54,8 +55,8 @@ const CategoriesCreate = () => {
   const update = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(`http://localhost:8000/api/categorie/${id}`, {
+    await axiosClient
+      .post(`/categorie/${id}`, {
         nom: nom,
         url: url,
         slug: slug,

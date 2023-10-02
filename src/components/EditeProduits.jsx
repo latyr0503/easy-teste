@@ -79,7 +79,7 @@ const EditeProduits = (props) => {
   }, []);
 
   const fetchBrand = async () => {
-    await axios.get(`http://localhost:8000/api/brand`).then(({ data }) => {
+    await axiosClient.get(`/brand`).then(({ data }) => {
       setBrandValue(data);
     });
   };
@@ -88,7 +88,7 @@ const EditeProduits = (props) => {
     fetchCategory();
   }, []);
   const fetchCategory = async () => {
-    await axios.get(`http://localhost:8000/api/categorie`).then(({ data }) => {
+    await axiosClient.get(`/categorie`).then(({ data }) => {
       setCategorieValue(data);
     });
   };
@@ -142,8 +142,8 @@ const EditeProduits = (props) => {
     e.preventDefault();
 
     try {
-      const response = await axios.put(
-        `http://localhost:8000/api/produit/${id}`,
+      const response = await axiosClient.put(
+        `/produit/${id}`,
         {
           nom: nom,
           slug: nom,

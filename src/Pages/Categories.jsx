@@ -17,7 +17,7 @@ const Categories = () => {
   }, []);
 
   const fetchCategory = async () => {
-    await axiosClient.get(`categorie`).then(({ data }) => {
+    await axiosClient.get(`/categorie`).then(({ data }) => {
       console.log(data);
     });
   };

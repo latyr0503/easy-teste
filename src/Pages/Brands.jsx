@@ -19,7 +19,7 @@ const Brands = () => {
   }, []);
 
   const fetchBrand = async () => {
-    await axios.get(`http://localhost:8000/api/brand`).then(({ data }) => {
+    await axiosClient.get(`/brand`).then(({ data }) => {
       updatebrand(data);
     
     });

@@ -136,7 +136,7 @@ const EditeCategory = (props) => {
   }, []);
   const fetchCategory = async () => {
 
-    await axios.get(`http://localhost:8000/api/categorie/${id}`)
+    await axiosClient.get(`/categorie/${id}`)
     .then(( { data } ) => {
       const { nom, slug, url, description, visibility }= data.category;
       setNom(nom),
@@ -187,7 +187,7 @@ const EditeCategory = (props) => {
         return;
       }
 
-      await axios.delete(`http://localhost:8000/api/categorie/${id}`).then(({data})=>{
+      await axiosClient.delete(`/categorie/${id}`).then(({data})=>{
         Swal.fire({
             icon:"success",
             text:data.message

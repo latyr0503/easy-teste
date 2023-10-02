@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosClient from "../axios";
 
 const BrandsCreate = () => {
   const [nom, setNom] = useState("");
@@ -21,8 +22,8 @@ const BrandsCreate = () => {
   const create = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post(`http://localhost:8000/api/brand`, {
+    await axiosClient
+      .post(`/brand`, {
         nom: nom,
         url: url,
         slug: nom,

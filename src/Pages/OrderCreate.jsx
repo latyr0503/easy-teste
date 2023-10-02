@@ -10,7 +10,7 @@ export const OrderCreate = () => {
     // Inversez la valeur de boutonClique pour basculer entre les éléments
     setBoutonClique(!boutonClique);
   };
-  const alertee = (e) => {
+  const alertee = (e) => {http://localhost:8000/api
     e.preventDefault();
     alert("dhfhfvdhvfd");
   };
