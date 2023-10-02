@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Router } from "react-router-dom";
 const axiosClient = axios.create({
-    baseURL: `http://localhost:8000/api`,  
+    baseURL: `https://laravel1.euleukcommunication.sn/api`,  
   });
 
   axiosClient.interceptors.request.use((config) => {
