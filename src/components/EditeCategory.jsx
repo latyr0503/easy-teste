@@ -131,22 +131,42 @@ const EditeCategory = (props) => {
   const [description, setDescrition] = useState("");
   const [visibility, setVisibility] = useState(false);
   const [data, setData] = useState([]);
+  const [monthCreated, setMonthCretead] = useState("");
+  const [monthUpdated, setMonthUpdated] = useState("");
   useEffect(() => {
     fetchCategory();
   }, []);
   const fetchCategory = async () => {
-
     await axiosClient.get(`/categorie/${id}`)
     .then(( { data } ) => {
-      const { nom, slug, url, description, visibility }= data.category;
+      const { nom, slug, url, description, visibility,created_at,
+        updated_at,}= data.category;
       setNom(nom),
       setUrl(url),
       setSlug(slug),
       setVisibility(visibility),
       setDescrition(description);
+      setMonthCretead(created_at);
+      setMonthUpdated(updated_at);
       setData(data.category)
     })
   }
+  // difference created_up
+  const mois = (monthCreated) => {
+    const date = new Date(monthCreated);
+    const dateActuelle = new Date();
+    const differenceMonth = dateActuelle.getFullYear() - date.getFullYear();
+    if (differenceMonth === 0) {
+      return "moins d'un mois";
+    } else if (differenceMonth === 1) {
+      return "il y a 1 mois";
+    } else {
+      return `il y a ${differenceMonth} mois`;
+    }
+  };
+// created up
+  const dateMonthCreated = mois(monthCreated);
+  const dateMonthUpdated = mois(monthUpdated);
   const updateCategory = async (e) => {
     e.preventDefault();
 
@@ -213,7 +233,7 @@ const EditeCategory = (props) => {
       <div className="grid grid-cols-2">
         <div className="">
           <p className="text-gray-500 md:text-base text-sm">
-            Brand &#62; {data?.nom} &#62; Edit
+            Category &#62; {data?.nom} &#62; Edit
           </p>
           <h2 className="text-3xl pt-2 font-bold">{data?.nom}</h2>
         </div>
@@ -328,11 +348,11 @@ const EditeCategory = (props) => {
         <div className="bg-white border border-gray-200 p-5 my-5 rounded-xl h-40">
           <div>
             <p className="font-medium">Created at</p>
-            <p className="text-gray-600">{"props.dateCreate"}</p>
+            <p className="text-gray-600">{dateMonthCreated}</p>
           </div>
           <div className="mt-5">
             <p className="font-medium">Last modified at</p>
-            <p className="text-gray-600">{"props.dateEdite"}</p>
+            <p className="text-gray-600">{dateMonthUpdated}</p>
           </div>
         </div>
       </div>
@@ -491,80 +511,6 @@ const EditeCategory = (props) => {
             </tbody>
           </table>
         </div>
-        {/* <nav
-          className="flex items-center justify-between p-5"
-          aria-label="Table navigation"
-        >
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              1-10
-            </span>{" "}
-            of{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              1000
-            </span>
-          </span>
-          <ul className="inline-flex -space-x-px text-sm h-8">
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Previous
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                1
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                2
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                aria-current="page"
-                className="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-              >
-                3
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                4
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                5
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Next
-              </a>
-            </li>
-          </ul>
-        </nav> */}
       </div>
     </div>
   );
